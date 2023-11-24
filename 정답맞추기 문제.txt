@@ -1,0 +1,182 @@
+ /*지금부터 게임을 시작합니다.
+
+	[0][0]에 숫자를 입력해주세요 : 1
+	[0][1]에 숫자를 입력해주세요 : 2
+	[0][2]에 숫자를 입력해주세요 : 3
+	[0][3]에 숫자를 입력해주세요 : 4
+	[1][0]에 숫자를 입력해주세요 : 1
+	[1][1]에 숫자를 입력해주세요 : 2
+	[1][2]에 숫자를 입력해주세요 : 3
+	[1][3]에 숫자를 입력해주세요 : 4
+	[2][0]에 숫자를 입력해주세요 : 1
+	[2][1]에 숫자를 입력해주세요 : 2
+	[2][2]에 숫자를 입력해주세요 : 3
+	[2][3]에 숫자를 입력해주세요 : 4
+	숫자가 저장되었습니다.답변자는 지금부터 문제에 대한 답변을 해주세요.
+
+
+
+	[0][0] : ? [0][1] : ? [0][2] : ? [0][3] : ?
+	[1][0] : ? [1][1] : ? [1][2] : ? [1][3] : ?
+	[2][0] : ? [2][1] : ? [2][2] : ? [2][3] : ?
+
+	답변을 맞추고 싶으시다면 열과 행을 입력해주세요.*/
+
+
+int score[3][4] = { 0, };
+int score1[3][4] = { 0, };
+int score2[3][4] = {0,};
+int rightanswer[3][4] = { 0, };
+int wronganswer[3][4] = { 0, };
+int sum = 0, num = 0, result = 0;
+int count = 0, count1 = 0, count2 = 0;
+int a, b, c, d;
+int select1, choice1;
+int select, choice, answer;
+
+
+
+printf("지금부터 게임을 시작 합니다\n\n");
+
+for (int i = 0; i <= 2; i++)
+{
+	for (int j = 0; j <= 3; j++)
+	{
+		printf("[%d][%d]에 숫자를 입력해주세요\n", i, j);
+		scanf("%d", &a);
+
+		score[i][j] = score[i][j] + a;
+	}
+}
+
+printf("숫자가 저장 되었습니다, 답변자는 지금부터 문제에 대한 답변을 해주세요\n\n");
+
+for (int i = 0; i <= 2; i++)
+{
+	for (int j = 0; j <= 3; j++)
+	{
+		printf("[%d][%d] : ?\t", i, j);
+	}
+	printf("\n");
+}
+
+
+
+while (1)
+{
+	printf("\n답변을 맞추고 싶으시다면 행과 열을 입력해주세요\n\n");
+
+	printf("행 입력 : \n");
+	scanf("%d", &select);
+
+	printf("열 입력 : \n");
+	scanf("%d", &choice);
+
+	printf("%d행과 %d열을 입력 하셨습니다\n", select, choice);
+	printf("5번 먼저 정답을 맞추시면 게임에서 승리합니다\n");
+	printf("정답은 무엇 입니까?\n");
+	scanf("%d", &answer);
+
+
+	if (score[select][choice] == answer)
+	{
+		score1[select][choice] = answer; 
+		score2[select][choice] = score2[select][choice] + answer;
+		rightanswer[select][choice] = answer;
+		for (int select = 0; select <= 2; select++)
+		{
+			for (int choice = 0; choice <= 3; choice++)
+			{
+				if (score[select][choice] != score1[select][choice])
+				{
+					printf("[%d][%d] : ?\t", select, choice);
+				}
+				
+				if (score[select][choice] == score1[select][choice])
+				{
+					printf("[%d][%d] : %d\t", select, choice, score1[select][choice]);
+				}
+				
+			}
+			printf("\n");
+		}
+		count1++;
+	}
+
+	if (count1 == 5)
+	{
+		printf("\n\n5개 정답을 맞추셔서 게임에서 승리 하셨습니다\n");
+
+		
+
+
+
+		for (int i = 0; i <= 2; i++)
+		{
+			for (int j = 0; j <= 3; j++)
+			{
+				sum = sum + rightanswer[i][j];
+			}
+		}
+		printf("정답의 총 합 : %d\n", sum);
+
+		return 0;
+	}
+
+	if (score[select][choice] != answer)
+	{
+		wronganswer[select][choice] = answer;
+		
+		count++;
+		num = answer;
+		if (count < 10)
+		{
+			printf("오답입니다\n");
+			
+			for (int select = 0; select <= 2; select++)
+			{
+				for (int choice = 0; choice <= 3; choice++)
+				{
+					if (score[select][choice] != score1[select][choice])
+					{
+						printf("[%d][%d] : ?\t", select, choice);
+					}
+
+					if (score[select][choice] == score1[select][choice])
+					{
+						printf("[%d][%d] : %d\t", select, choice, score1[select][choice]);
+					}
+
+				}
+				printf("\n");
+			}
+
+			printf("\n%d번째 기회 입니다 10번째 기회가 넘어가면 프로그램이 종료됩니다\n", count);
+		}
+
+		if (count == 10)
+		{
+			printf("%d번째 오답입력으로 인해 프로그램을 종료합니다\n", count);
+			for (int i = 0; i <= 2; i++)
+			{
+				for (int j = 0; j <= 3; j++)
+				{
+					sum = sum + wronganswer[i][j];
+				}
+			}
+			printf("오답의 총 합 : %d\n\n", sum);
+			printf("정답판 입니다\n");
+			for (int i = 0; i <= 2; i++)
+			{
+				for (int j = 0; j <= 3; j++)
+				{
+					printf("[%d][%d]에 들어간 숫자 : %d\t", i, j, score[i][j]);
+				}
+				printf("\n");
+			}
+
+			return 0;
+		}
+		
+	}
+}

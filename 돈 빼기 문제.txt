@@ -1,0 +1,141 @@
+/*돈 빼기 프로그램을 개발해보자.
+
+    처음에 몇 명의 돈을 추가할 지 입력받는다.
+            강사는 일일이 써야 하기 때문에, 손가락이 아플 테니 3명으로 하겠다.
+    3을 입력받았으면 아래처럼 나타난다.
+
+    1번째 손님 추가할 금액 : 10000
+    2번째 손님 추가할 금액 : 10000
+    3번째 손님 추가할 금액 : 10000
+    이렇게 쓰면, 바로 아래처럼 나타난다.
+    1번째 손님이 가진 금액 : 10000
+    2번째 손님이 가진 금액 : 10000
+    3번째 손님이 가진 금액 : 10000
+    그리고, 바로 몇 번째 손님의 돈을 뺄 지 질문한다.
+            강사는 2번째라고 하겠다.
+    그렇게 하면, 얼마를 빼겠냐고 질문한다.
+    이 때에, 돈을 뺐을 당시 돈이 0원이 된다면 해당 손님의 번호는 사라진다.
+    예시를 들겠다.
+
+    몇 번째 손님을 선택하겠습니까 : 2
+    얼마를 빼시겠습니까 : 10000
+
+    1번째 손님이 가진 금액 : 10000
+    2번째 손님이 가진 금액 : 10000
+
+    손님의 돈을 얼마를 빼든, 빼면 바로 위처럼 몇 번까지 존재하고, 얼마를 가지고 있는지를 나타낸다.
+            따라서, 현재 위 같은 경우, 2번 손님의 돈이 0원이 되어 삭제되고, 3번의 손님이 2번으로 바뀐 걸 확인할 수 있다.
+    위 같은 문제를 만들어보고,
+
+    마지막에는 현재 남은 손님들의 돈이 합쳐서 얼마나 존재하는지를 나타내고, 현재 몇 번까지 존재하는질 나타내보자.
+    또한, 처음에 있었던 3명은 얼마를 가지고 있었고, 현재는 얼마가 남았는지, 총액을 알아내고,
+            둘이 얼마나 차액이 벌어졌는지를 나타내자.
+
+    손님 선택과 뺄 금액에서 둘 다 9을 입력하면 종료된다.*/
+
+    Scanner input = new Scanner(System.in);
+
+    int money[] = new int[100];
+    int plus;
+    int human;
+    int choice;
+    int minus;
+    int lastmoney = 0;
+    int people = 0;
+    int firstmoney[] = new int[100];
+    int firstmoney1 = 0;
+    int money2 = 0;
+    int money3 = 0;
+
+
+    System.out.println("몇 명의 돈을 추가 할까요?");
+    human = input.nextInt();
+
+    for (int i = 0; i <= human - 1; i++)
+    {
+        System.out.println(i + 1 + "번째 손님 추가 할 금액 : ");
+        plus = input.nextInt();
+        money[i] = plus;
+        firstmoney1 = firstmoney1 + money[i];
+    }
+
+    for (int i = 0; i <= human - 1; i++)
+    {
+        System.out.println((i + 1) + "번째 손님이 가진 금액 = " + money[i]);
+    }
+
+    while (true)
+    {
+        System.out.println();
+        System.out.println("몇 번째 손님을 선택 하시겠습니까 ? (종료 방법은 둘다 9를 입력해주세요)");
+        choice = input.nextInt();
+        System.out.println("얼마를 빼시겠습니까?");
+        minus = input.nextInt();
+
+        money[choice - 1] = money[choice - 1] - minus;
+
+
+        int a;
+
+        if (money[choice - 1] == 0)
+        {
+            for (a = choice - 1; a <= human - 1; a++)
+            {
+                money[a] = money[a + 1];
+            }
+
+            if (money[a] == 0)
+            {
+                human--;
+            }
+        }
+
+
+        for (int i = 0; i <= human - 1; i++)
+        {
+            if (money[i] == 0)
+            {
+                money[i] = money[i + 1];
+                System.out.println("i = " + i);
+            }
+        }
+
+        for (int q = 0; q <= human - 1; q++)
+        {
+            System.out.println((q + 1) + "번째 손님이 가진 금액 = " + money[q]);
+        }
+
+
+
+        if (choice == 9 && minus == 9)
+        {
+
+            System.out.println("현재 남은 손님들의 총 금액");
+            for (int i = 0; i <= human - 1; i++)
+            {
+                lastmoney = lastmoney + money[i];
+            }
+
+
+            System.out.println(lastmoney);
+
+            System.out.println("현재 남은 손님의 숫자");
+
+            for (int i = 0; i <= human - 1; i++)
+            {
+                people = i;
+            }
+
+
+            System.out.println(people + 1);
+
+            System.out.println("처음 가지고 있던 금액 = " + firstmoney1);
+
+
+            money2 = firstmoney1 - lastmoney;
+
+            System.out.println("처음 가진 돈과 현재 가진 돈의 차액");
+            System.out.println(money2);
+            break;
+        }
+    }

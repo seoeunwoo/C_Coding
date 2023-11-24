@@ -1,0 +1,148 @@
+/*총 10개의 값을 받게 된다.
+그리고 출력은 거꾸로 출력되게 만들어주세요.
+거꾸로 출력이 완료되었다면, [그 후]
+이번에는 입력 받은 값의 합을 나타내시고,
+혹시라도 7이라는 숫자를 입력한 적이 있다면, 해당 7이라는 숫자가 몇 번이나 나왔는지,
+해당 7이라는 숫자가 들어있는 배열[거꾸로 배열 기준]의 인덱스 중 가장 마지막은 몇 번인지를 나타내시고,
+7이 나온 수만큼 더해진 값이 얼마인지 나타내보세요.
+
+  예시)
+
+  입력 1 2 3 4 5 6 7 7 8 9 10
+
+  [거꾸로]10 9 8 7 7 6 5 4 3 2 1
+
+  총 합은 62입니다.
+
+  7은 총 2번 나왔습니다.
+
+  7이 들어있는 index 중에서 가장 마지막은 7번 입니다.
+
+  7이 나온 값만큼 더한 숫자는 14입니다.*/
+
+int total[100] = { 0, };
+int number;
+int sum = 0;
+int num = 0;
+int a, b, c;
+int count = 0, count1 = 0;
+int index = 0;
+
+printf("몇 개의 값을 입력 할까요?\n");
+scanf("%d", &number);
+
+
+for (int i = 0; i <= number - 1; i++)
+{
+	printf("%d번째 값을 입력하세요 : \n", i + 1);
+	scanf("%d", &total[i]);
+}
+
+// 거꾸로
+printf("\n");
+
+for (int i = number - 1; i >= 0; i--)
+{
+	printf("%d\n", total[i]);
+}
+
+for (int i = 0; i <= number - 1; i++)
+{
+	sum = sum + total[i];
+}
+
+printf("총 합은 %d입니다\n", sum);
+
+printf("\n");
+
+// 7만 골라내서 7의 합구하기 
+// 배열을 검사해서 7이 있는지 확인하고 출력
+
+
+
+
+for (int i = 0; i <= number - 1; i++)
+{
+	if (total[i] == 7)
+	{
+		count = count + 1;
+	}
+	num = count * 7;
+
+}
+
+printf("7은 %d개가 들어있습니다 \n", count);
+printf("7이 나온 값 만큼 더한 값은 %d입니다\n", num);
+
+printf("\n");
+
+// 예 ) index[1] = 7 , index[2] = 7 이면 같은 숫자 마지막 번째 인덱스값 구하기 
+
+for (int i = number - 1; i >= 0; i--)
+{
+	if (total[i] == 7)
+	{
+		index = i;
+		printf("7이 저장되어 있는 배열은 %d번째 입니다\n", index);
+	}
+}
+
+printf("\n");
+
+for (int i = number - 1; i >= 0; i--)
+{
+	if (total[i] == 7)
+	{
+		index = i;
+	}
+
+	if (index < i)
+	{
+		printf("7이 저장되어 있는 배열 중 가장 마지막 배열은 %d번째 입니다\n", index);
+		break;
+	}
+}
+
+printf("모든 배열 값을 하나씩 삭제 하면서 7만 남았을때 종료하는 코드를 작성하세요\n");
+
+for (int i = 0; i <= number - 1; i++)
+{
+	printf("%d번째 배열에 저장되어 있는 숫자들 : %d\n", i + 1, total[i]);
+}
+
+while (1)
+{
+	printf("몇 번째 배열 값을 삭제 하겠습니끼?\n");
+	scanf("%d", &a);
+
+	printf("삭제 할 값을 입력하세요\n");
+	scanf("%d", &b);
+	while (b == 7)
+	{
+		printf("\n\n7의 값은 뺄 수 없습니다.\n\n");
+		printf("삭제 할 값을 입력하세요\n");
+		scanf("%d", &b);
+		break;
+	}
+	total[a - 1] = total[a - 1] - b;
+
+	if (total[a - 1] == 0)
+	{
+		for (int k = a - 1; k <= number - 1; k++)
+		{
+			total[k] = total[k + 1];
+		}
+		number = number - 1;
+	}
+
+	for (int i = 0; i <= number - 1; i++)
+	{
+		printf("삭제 되고 난 %d번째 배열 값 : %d\n", i + 1, total[i]);
+
+	}
+
+	if (a == 0)
+	{
+		break;
+	}
+}

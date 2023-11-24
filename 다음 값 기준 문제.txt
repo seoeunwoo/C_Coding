@@ -1,0 +1,194 @@
+/*몇개까지 있다고 할까요 : 20
+
+    1번째 값 : 0
+        [다음 값 기준]
+    1.더하기
+    2.빼기
+    3.특정 값 불러오기
+
+    선택 : 1
+
+
+    숫자 입력 : 1
+
+
+    1번째 값 : 0
+
+    2번째 값 : 1
+        [다음 값 기준]
+    1.더하기
+    2.빼기
+    3.특정 값 불러오기
+
+    선택 : 1
+
+
+    숫자 입력 : 1
+
+
+    1번째 값 : 0
+
+    2번째 값 : 1
+
+    3번째 값 : 2
+        [다음 값 기준]
+    1.더하기
+    2.빼기
+    3.특정 값 불러오기
+
+    선택 : 2
+
+
+    숫자 입력 : 2
+
+
+    1번째 값 : 0
+
+    2번째 값 : 1
+
+    3번째 값 : 2
+
+    4번째 값 : 0
+        [다음 값 기준]
+    1.더하기
+    2.빼기
+    3.특정 값 불러오기
+
+    선택 : 1
+
+
+    숫자 입력 : 5
+
+
+    1번째 값 : 0
+
+    2번째 값 : 1
+
+    3번째 값 : 2
+
+    4번째 값 : 0
+
+    5번째 값 : 5
+        [다음 값 기준]
+    1.더하기
+    2.빼기
+    3.특정 값 불러오기
+
+    선택 : 2
+
+
+    숫자 입력 : 2
+
+
+    1번째 값 : 0
+
+    2번째 값 : 1
+
+    3번째 값 : 2
+
+    4번째 값 : 0
+
+    5번째 값 : 5
+
+    6번째 값 : 3
+        [다음 값 기준]
+    1.더하기
+    2.빼기
+    3.특정 값 불러오기
+
+    선택 : 3
+
+
+    번호 선택 : 3
+
+
+    1번째 값 : 0
+
+    2번째 값 : 1
+
+    3번째 값 : 2
+
+    4번째 값 : 0
+
+    5번째 값 : 5
+
+    6번째 값 : 3
+
+    7번째 값 : 2
+        [다음 값 기준]
+    1.더하기
+    2.빼기
+    3.특정 값 불러오기
+
+    선택 :*/
+
+    Scanner input = new Scanner(System.in);
+
+    int number[] = new int[100];
+    int plus;
+    int minus;
+    int choice;
+    int count;
+    int count1[] = new int[100];
+    int score[] = new int[100];
+    int choice2;
+
+
+
+
+
+    System.out.println("몇 개 까지 있다고 할까요?");
+    count = input.nextInt();
+
+    for (int i = 0; i <= count - 1; i++)
+    {
+        score[i] = 0;
+    }
+
+    for (int i = 0; i <= count - 1; i++)
+    {
+        System.out.println(score[i]);
+    }
+
+    
+
+    for (int i = 0; i <= count - 1; i++)
+    {
+
+        System.out.println("[다음 값 기준]");
+        System.out.println("1. 더하기");
+        System.out.println("2. 빼기");
+        System.out.println("3. 특정 값 불러오기");
+
+        choice2 = input.nextInt();
+
+        if (choice2 == 1)
+        {
+            System.out.println("숫자 입력 : ");
+            plus = input.nextInt();
+
+            number[i + 1] = number[i] + plus;
+        }
+
+        if (choice2 == 2)
+        {
+            System.out.println("숫자 입력 : ");
+            minus = input.nextInt();
+            number[i + 1] = number[i] - minus;
+        }
+
+        if (choice2 == 3)
+        {
+            System.out.println("숫자 입력 : ");
+            choice = input.nextInt();
+            number[i + 1] = number[choice];
+        }
+
+        for (int q = 0; q <= count - 1; q++)
+        {
+            if (number[q] > 0)
+            {
+                System.out.println(q + "번째 값 = " + number[q]);
+            }
+        }
+    }
